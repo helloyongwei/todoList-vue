@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>todoList</title>
+</head>
+<body>
+  <div id="root">
+    <div>
+      <input type="text" v-model="inputValue">
+      <button @click="handleClick">提交</button>
+    </div>
+    <div>
+      <ul>
+        <li v-for="(list, index) of lists" :key="index">{{list}}</li>
+      </ul>
+    </div>
+  </div>
+  <script src="./node_modules/vue/dist/vue.min.js"></script>
+  <script>
+    const root = new Vue({
+      el: '#root',
+      data: {
+        inputValue: '',
+        lists: []
+      },
+      methods: {
+        handleClick: function() {
+          this.lists.push(this.inputValue)
+          this.inputValue = ''
+        }
+      }
+    })
+  </script>
+</body>
+</html>
