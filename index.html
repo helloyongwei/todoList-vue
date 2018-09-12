@@ -21,12 +21,15 @@
   </div>
   <script src="./node_modules/vue/dist/vue.min.js"></script>
   <script>
+
     Vue.component('todo-item', {
       props: ['content', 'index'],
-      template: '<li @click="handleClick">{{content}}</li>',
+      template: `
+      <li>{{content}}<button @click="handleClick">删除</button></li>
+      `,
       methods: {
         handleClick: function() {
-          this.$emit('delete', $event)
+          this.$emit('delete', this.index)
         }
       }
     })
