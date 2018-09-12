@@ -15,12 +15,16 @@
     </div>
     <div>
       <ul>
-        <li v-for="(list, index) of lists" :key="index">{{list}}</li>
+        <todo-item v-for="(list, index) of lists" :key="index" :content="list"></todo-item>
       </ul>
     </div>
   </div>
   <script src="./node_modules/vue/dist/vue.min.js"></script>
   <script>
+    Vue.component('todo-item', {
+      props: ['content'],
+      template: '<li>{{content}}</li>'
+    })
     const root = new Vue({
       el: '#root',
       data: {
@@ -29,7 +33,9 @@
       },
       methods: {
         handleClick: function() {
+          console.log(1);
           this.lists.push(this.inputValue)
+          console.log(this.lists);
           this.inputValue = ''
         }
       }
