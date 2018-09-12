@@ -15,15 +15,20 @@
     </div>
     <div>
       <ul>
-        <todo-item v-for="(list, index) of lists" :key="index" :content="list"></todo-item>
+        <todo-item v-for="(list, index) of lists" :key="index" :content="list" :index="index" @delete="handleDelete"></todo-item>
       </ul>
     </div>
   </div>
   <script src="./node_modules/vue/dist/vue.min.js"></script>
   <script>
     Vue.component('todo-item', {
-      props: ['content'],
-      template: '<li>{{content}}</li>'
+      props: ['content', 'index'],
+      template: '<li @click="handleClick">{{content}}</li>',
+      methods: {
+        handleClick: function() {
+          this.$emit('delete', $event)
+        }
+      }
     })
     const root = new Vue({
       el: '#root',
@@ -37,6 +42,9 @@
           this.lists.push(this.inputValue)
           console.log(this.lists);
           this.inputValue = ''
+        },
+        handleDelete: function(index) {
+          this.lists.splice(index, 1)
         }
       }
     })
